@@ -51,7 +51,7 @@ constitution -> specify -> (clarify) -> plan -> tasks -> (analyze) -> implement
 
 实现效果如图：
 
-![alt text](image.png)
+<img src="images/2048.png" alt="alt text">
 
 # Speckit学习-3D看房项目 :house:
 
@@ -61,4 +61,14 @@ constitution -> specify -> (clarify) -> plan -> tasks -> (analyze) -> implement
 
 实现效果如图：
 
-![alt text](image-1.png)
+<img src="images/3D-housing.png" alt="alt text">  
+
+# Speckit学习-颜值打分 :lipstick:
+
+<img src="images/face-rating-1.png" alt="alt text">
+
+<img src="images/face-rating-2.png" alt="alt text">
+
+<img src="images/face-rating-3.png" alt="alt text">
+
+<img src="images/face-rating-4.png" alt="alt text">
