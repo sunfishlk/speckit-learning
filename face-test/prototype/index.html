@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>颜值测试 - Beauty Rating App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">✨ 颜值测试</h1>
+            <p class="tagline">AI 智能颜值分析</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Upload Section (User Story 1 - P1) -->
+            <section id="upload-section" class="section active">
+                <div class="upload-container">
+                    <h2>上传你的照片</h2>
+                    <p class="description">上传清晰的正面照片，获得专业的颜值分析</p>
+
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-content">
+                            <div class="upload-icon">📷</div>
+                            <p>点击或拖拽上传照片</p>
+                            <p class="upload-hint">支持 JPG、PNG 格式，最大 10MB</p>
+                        </div>
+                        <input type="file" id="photo-input" accept="image/jpeg,image/png,image/webp" hidden>
+                    </div>
+
+                    <div id="preview-container" class="preview-container hidden">
+                        <img id="preview-image" alt="预览图片">
+                        <div class="preview-actions">
+                            <button id="analyze-btn" class="btn btn-primary">开始分析</button>
+                            <button id="reset-btn" class="btn btn-secondary">重新选择</button>
+                        </div>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="loading-section" class="loading-container hidden">
+                        <div class="loading-spinner"></div>
+                        <p>AI 正在分析你的照片...</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Error State -->
+                    <div id="error-section" class="error-container hidden">
+                        <div class="error-icon">⚠️</div>
+                        <h3 id="error-title">分析失败</h3>
+                        <p id="error-message">请上传清晰的人脸照片</p>
+                        <button id="retry-btn" class="btn btn-primary">重新尝试</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section (User Story 1 - P1) -->
+            <section id="results-section" class="section hidden">
+                <div class="results-container">
+                    <h2>你的颜值分析结果</h2>
+
+                    <!-- Basic Rating Display -->
+                    <div class="rating-card">
+                        <div class="score-circle">
+                            <div class="score-number" id="score-number">85</div>
+                            <div class="score-label">分</div>
+                        </div>
+                        <div class="rating-info">
+                            <h3 id="rating-category">颜值出众</h3>
+                            <p id="rating-description">你拥有很好的面部比例和五官协调性</p>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="view-details-btn" class="btn btn-primary">查看详细分析</button>
+                        <button id="new-analysis-btn" class="btn btn-secondary">重新测试</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Analysis Section (User Story 2 - P2) -->
+            <section id="details-section" class="section hidden">
+                <div class="details-container">
+                    <div class="section-header">
+                        <button id="back-to-results" class="btn-back">← 返回结果</button>
+                        <h2>详细分析报告</h2>
+                    </div>
+
+                    <!-- Feature Breakdown -->
+                    <div class="features-analysis">
+                        <h3>五官分析</h3>
+                        <div class="feature-scores">
+                            <div class="feature-item">
+                                <span class="feature-name">面部对称性</span>
+                                <div class="feature-bar">
+                                    <div class="feature-fill" style="width: 88%"></div>
+                                </div>
+                                <span class="feature-score">88分</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-name">五官比例</span>
+                                <div class="feature-bar">
+                                    <div class="feature-fill" style="width: 82%"></div>
+                                </div>
+                                <span class="feature-score">82分</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-name">肌肤质量</span>
+                                <div class="feature-bar">
+                                    <div class="feature-fill" style="width: 85%"></div>
+                                </div>
+                                <span class="feature-score">85分</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-name">眼部特征</span>
+                                <div class="feature-bar">
+                                    <div class="feature-fill" style="width: 87%"></div>
+                                </div>
+                                <span class="feature-score">87分</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Celebrity Comparisons -->
+                    <div class="celebrity-comparisons">
+                        <h3>同分段明星对比</h3>
+                        <p class="comparison-desc">你的颜值与以下明星处于同一水平</p>
+                        <div class="celebrity-grid" id="celebrity-grid">
+                            <!-- Celebrity cards will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="view-recommendations-btn" class="btn btn-primary">查看改善建议</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommendations Section (User Story 3 - P3) -->
+            <section id="recommendations-section" class="section hidden">
+                <div class="recommendations-container">
+                    <div class="section-header">
+                        <button id="back-to-details" class="btn-back">← 返回详情</button>
+                        <h2>个性化改善建议</h2>
+                    </div>
+
+                    <div class="recommendations-tabs">
+                        <button class="tab-btn active" data-tab="makeup">化妆建议</button>
+                        <button class="tab-btn" data-tab="skincare">护肤建议</button>
+                        <button class="tab-btn" data-tab="styling">造型建议</button>
+                    </div>
+
+                    <div class="recommendations-content">
+                        <div id="makeup-content" class="tab-content active">
+                            <div class="recommendation-item">
+                                <h4>眼妆优化</h4>
+                                <p>建议使用大地色系眼影，突出你的眼部轮廓。可以尝试加深眼尾部分，让眼型更加优美。</p>
+                            </div>
+                            <div class="recommendation-item">
+                                <h4>唇妆搭配</h4>
+                                <p>你的唇形很好，建议选择珊瑚色或豆沙色唇膏，既自然又能提升整体气色。</p>
+                            </div>
+                            <div class="recommendation-item">
+                                <h4>修容建议</h4>
+                                <p>适度的修容可以进一步提升面部立体感，建议在颧骨和鼻梁处做轻微修饰。</p>
+                            </div>
+                        </div>
+
+                        <div id="skincare-content" class="tab-content">
+                            <div class="recommendation-item">
+                                <h4>保湿护理</h4>
+                                <p>保持良好的保湿习惯，建议使用含有透明质酸的精华液，让肌肤更加水润有光泽。</p>
+                            </div>
+                            <div class="recommendation-item">
+                                <h4>防晒保护</h4>
+                                <p>日常防晒非常重要，建议使用SPF30以上的防晒霜，保护肌肤免受紫外线伤害。</p>
+                            </div>
+                        </div>
+
+                        <div id="styling-content" class="tab-content">
+                            <div class="recommendation-item">
+                                <h4>发型建议</h4>
+                                <p>你的脸型适合中分或者偏分的发型，可以尝试微卷或者直发都很好看。</p>
+                            </div>
+                            <div class="recommendation-item">
+                                <h4>配饰搭配</h4>
+                                <p>简约的耳饰能够很好地衬托你的脸型，建议选择小巧精致的款式。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="share-results-btn" class="btn btn-primary">分享结果</button>
+                        <button id="start-over-btn" class="btn btn-secondary">开始新测试</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Beauty Rating App. 仅供娱乐参考。</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
